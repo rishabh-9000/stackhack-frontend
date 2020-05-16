@@ -1,8 +1,12 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" [opened]="true">
-    Test
+  <mat-sidenav [mode]="sideNavMode" [opened]="sideNavOpened">
+    <div class="mat-title">STACKHACK</div>
+    <div class="sidenav-items">
+      <mat-icon class="sidenav-item-icon">assignment</mat-icon>
+      <div class="item-name">Register</div>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    Hello Word
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

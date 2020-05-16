@@ -1,0 +1,38 @@
+.mat-sidenav-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.mat-sidenav {
+  width: 250px;
+  padding: 12px 16px;
+  background-color: rgb(244, 245, 247);
+}
+
+.mat-title {
+  display: flex;
+  justify-content: center;
+  padding: 10% 0%;
+}
+
+.sidenav-items {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.sidenav-items:hover {
+  cursor: pointer;
+  background-color: rgb(235, 236, 240);
+}
+
+.sidenav-item-icon {
+  margin: 0px 16px;
+}
+.item-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.14286;
+  color: rgb(66, 82, 110);
+  overflow: hidden;
+}
