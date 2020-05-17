@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {
+  FormControl,
+  Validators,
+  FormGroup,
+  FormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +12,15 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
+  firstFormGroup: FormGroup;
+
   fullName = new FormControl('', [Validators.required]);
 
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.firstFormGroup = this.formBuilder.group({
+      firstCtrl: ['', Validators.required],
+    });
+  }
 }
