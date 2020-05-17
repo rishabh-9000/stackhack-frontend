@@ -12,15 +12,34 @@ import {
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  firstFormGroup: FormGroup;
-
-  fullName = new FormControl('', [Validators.required]);
+  deatailsFormGroup: FormGroup;
+  registrationTypes = [
+    { key: 'Self', value: 'self' },
+    { key: 'Corporate', value: 'Corporate' },
+    { key: 'Group', value: 'group' },
+    { key: 'Other', value: 'other' },
+  ];
+  ticketCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required],
+    this.deatailsFormGroup = this.formBuilder.group({
+      fullName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      mobile: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      registrationType: new FormControl('', [Validators.required]),
+      numberOfTickets: new FormControl('', [Validators.required]),
     });
+  }
+
+  print() {
+    console.log(this.deatailsFormGroup);
   }
 }

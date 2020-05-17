@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
 
 const modules = [
   MatButtonModule,
@@ -14,6 +15,7 @@ const modules = [
   MatInputModule,
   MatFormFieldModule,
   MatStepperModule,
+  MatSelectModule,
 ];
 
 @NgModule({

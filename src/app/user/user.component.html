@@ -1,13 +1,47 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+  <mat-step [stepControl]="deatailsFormGroup">
+    <form class="register-form" [formGroup]="deatailsFormGroup">
       <ng-template matStepLabel>Details</ng-template>
-      <mat-form-field appearence="true">
+      <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput formControlName="firstCtrl" required />
+        <input matInput formControlName="fullName" required />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Mobile</mat-label>
+        <input matInput type="number" formControlName="mobile" required />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Registration Type</mat-label>
+        <mat-select formControlName="registrationType" required>
+          <mat-option
+            *ngFor="let type of registrationTypes"
+            [value]="type.value"
+          >
+            {{ type.key }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Number of Tickets</mat-label>
+        <mat-select formControlName="numberOfTickets" required>
+          <mat-option *ngFor="let count of ticketCount" [value]="count">
+            {{ count }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <div>
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="print()"
+          matStepperNext
+        >
+          Next
+        </button>
       </div>
     </form>
   </mat-step>
