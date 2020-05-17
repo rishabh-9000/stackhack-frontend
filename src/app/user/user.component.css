@@ -2,3 +2,41 @@
   display: flex;
   flex-direction: column;
 }
+
+.form-item {
+  display: flex;
+  align-items: baseline;
+}
+
+.form-item .mat-form-field {
+  width: 350px;
+}
+
+.form-item .mat-icon {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.preview-div {
+  padding: 5% 0%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-item {
+  margin: 1% 0%;
+}
+
+.mat-body-2 {
+  margin: 0px 10px;
+}
+
+.final-action-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.final-action-buttons button {
+  margin-right: 10px;
+}

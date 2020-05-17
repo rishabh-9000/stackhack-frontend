@@ -1,42 +1,75 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="deatailsFormGroup">
-    <form class="register-form" [formGroup]="deatailsFormGroup">
+  <mat-step [stepControl]="detailsFormGroup">
+    <form class="register-form" [formGroup]="detailsFormGroup">
       <ng-template matStepLabel>Details</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="fullName" required />
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Mobile</mat-label>
-        <input matInput type="number" formControlName="mobile" required />
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" required />
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Registration Type</mat-label>
-        <mat-select
-          formControlName="registrationType"
-          (selectionChange)="onChange($event.value)"
-          required
+
+      <div class="form-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullName" required />
+        </mat-form-field>
+        <mat-icon matTooltip="Full Name is Required" matTooltipPosition="above"
+          >help</mat-icon
         >
-          <mat-option
-            *ngFor="let type of registrationTypes"
-            [value]="type.value"
+      </div>
+
+      <div class="form-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Mobile</mat-label>
+          <input matInput formControlName="mobile" required />
+        </mat-form-field>
+        <mat-icon
+          matTooltip="Mobile is Required. 10 Digits Minimum."
+          matTooltipPosition="above"
+          >help</mat-icon
+        >
+      </div>
+
+      <div class="form-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required />
+        </mat-form-field>
+        <mat-icon
+          matTooltip="Email is Required. Ex. example@email.com"
+          matTooltipPosition="above"
+          >help</mat-icon
+        >
+      </div>
+
+      <div class="form-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Registration Type</mat-label>
+          <mat-select
+            formControlName="registrationType"
+            (selectionChange)="onChange()"
+            required
           >
-            {{ type.key }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Number of Tickets</mat-label>
-        <mat-select formControlName="numberOfTickets" required>
-          <mat-option *ngFor="let count of ticketCount" [value]="count">
-            {{ count }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <mat-option
+              *ngFor="let type of registrationTypes"
+              [value]="type.value"
+            >
+              {{ type.key }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Number of Tickets</mat-label>
+          <mat-select
+            formControlName="numberOfTickets"
+            (selectionChange)="onChange()"
+            required
+          >
+            <mat-option *ngFor="let count of ticketCount" [value]="count">
+              {{ count }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <div>
         <button
           mat-raised-button
@@ -51,10 +84,46 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Confirm</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <div class="preview-div">
+      <div class="preview-item">
+        <span class="mat-body-1">Full Name:</span>
+        <span class="mat-body-2">{{
+          detailsFormGroup.get("fullName").value
+        }}</span>
+      </div>
+      <div class="preview-item">
+        <span class="mat-body-1">Mobile:</span>
+        <span class="mat-body-2">{{
+          detailsFormGroup.get("mobile").value
+        }}</span>
+      </div>
+      <div class="preview-item">
+        <span class="mat-body-1">Email:</span>
+        <span class="mat-body-2">{{
+          detailsFormGroup.get("email").value
+        }}</span>
+      </div>
+      <div class="preview-item">
+        <span class="mat-body-1">Registration Type:</span>
+        <span class="mat-body-2" style="text-transform: capitalize;">{{
+          detailsFormGroup.get("registrationType").value
+        }}</span>
+      </div>
+      <div class="preview-item">
+        <span class="mat-body-1">Number of Ticket(s):</span>
+        <span class="mat-body-2">{{
+          detailsFormGroup.get("numberOfTickets").value
+        }}</span>
+      </div>
+    </div>
+    <div class="final-action-buttons">
+      <button mat-raised-button matStepperPrevious>Back</button>
+      <button mat-raised-button color="warn" (click)="stepper.reset()">
+        Reset
+      </button>
+      <button mat-raised-button color="primary">
+        Submit
+      </button>
     </div>
   </mat-step>
 </mat-vertical-stepper>

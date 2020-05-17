@@ -12,7 +12,7 @@ import {
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  deatailsFormGroup: FormGroup;
+  detailsFormGroup: FormGroup;
   registrationTypes = [
     { key: 'Self', value: 'self' },
     { key: 'Corporate', value: 'Corporate' },
@@ -24,13 +24,14 @@ export class UserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.deatailsFormGroup = this.formBuilder.group({
+    this.detailsFormGroup = this.formBuilder.group({
       fullName: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
       ]),
       mobile: new FormControl('', [
         Validators.required,
+        Validators.pattern('^[0-9]*$'),
         Validators.minLength(10),
       ]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -40,12 +41,14 @@ export class UserComponent implements OnInit {
   }
 
   print() {
-    console.log(this.deatailsFormGroup);
+    console.log(this.detailsFormGroup);
   }
 
-  onChange(type: string) {
-    if (type === 'self') {
-      this.deatailsFormGroup.patchValue({ numberOfTickets: 1 });
+  onChange() {
+    const regType = this.detailsFormGroup.get('registrationType').value;
+
+    if (regType === 'self') {
+      this.detailsFormGroup.patchValue({ numberOfTickets: 1 });
     }
   }
 }
