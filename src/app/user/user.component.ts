@@ -42,4 +42,10 @@ export class UserComponent implements OnInit {
   print() {
     console.log(this.deatailsFormGroup);
   }
+
+  onChange(type: string) {
+    if (type === 'self') {
+      this.deatailsFormGroup.patchValue({ numberOfTickets: 1 });
+    }
+  }
 }

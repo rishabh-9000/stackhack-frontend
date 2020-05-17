@@ -16,7 +16,11 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Registration Type</mat-label>
-        <mat-select formControlName="registrationType" required>
+        <mat-select
+          formControlName="registrationType"
+          (selectionChange)="onChange($event.value)"
+          required
+        >
           <mat-option
             *ngFor="let type of registrationTypes"
             [value]="type.value"
