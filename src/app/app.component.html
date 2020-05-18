@@ -1,9 +1,29 @@
 <mat-sidenav-container>
   <mat-sidenav [mode]="sideNavMode" [opened]="sideNavOpened">
-    <div class="mat-title">STACKHACK</div>
-    <div class="sidenav-items">
-      <mat-icon class="sidenav-item-icon">assignment</mat-icon>
-      <div class="item-name">Register</div>
+    <div class="sidenav">
+      <div class="links">
+        <div class="mat-title">STACKHACK</div>
+        <div class="sidenav-items" [routerLink]="['']">
+          <mat-icon class="sidenav-item-icon">home</mat-icon>
+          <div class="item-name">Home</div>
+        </div>
+        <div class="sidenav-items" [routerLink]="['/register']">
+          <mat-icon class="sidenav-item-icon">assignment</mat-icon>
+          <div class="item-name">Register</div>
+        </div>
+        <div class="sidenav-items" [routerLink]="['/charts']">
+          <mat-icon class="sidenav-item-icon">insert_chart</mat-icon>
+          <div class="item-name">Charts</div>
+        </div>
+      </div>
+      <button
+        mat-flat-button
+        color="primary"
+        class="admin-login"
+        [routerLink]="['']"
+      >
+        ADMIN
+      </button>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
