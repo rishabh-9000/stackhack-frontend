@@ -5,6 +5,8 @@ import {
   FormGroup,
   FormBuilder,
 } from '@angular/forms';
+import { UserService } from './user.service';
+import { Register } from './models/register.interface';
 
 @Component({
   selector: 'app-user',
@@ -21,7 +23,10 @@ export class UserComponent implements OnInit {
   ];
   ticketCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.detailsFormGroup = this.formBuilder.group({
@@ -50,5 +55,13 @@ export class UserComponent implements OnInit {
     if (regType === 'self') {
       this.detailsFormGroup.patchValue({ numberOfTickets: 1 });
     }
+  }
+
+  onSubmit() {
+    this.userService
+      .register(this.detailsFormGroup.value)
+      .subscribe((response) => {
+        console.log(JSON.stringify(response));
+      });
   }
 }

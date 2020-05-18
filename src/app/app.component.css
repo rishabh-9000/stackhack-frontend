@@ -9,6 +9,11 @@
   background-color: rgb(244, 245, 247);
 }
 
+.mat-sidenav-content {
+  height: 100vh;
+  background-color: white;
+}
+
 .mat-title {
   display: flex;
   justify-content: center;
