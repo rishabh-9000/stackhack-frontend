@@ -8,6 +8,8 @@ import { MaterialModule } from './material/material.module';
 import { UserModule } from './user/user.module';
 import { FormsModule } from '@angular/forms';
 import { HomeModule } from './home/home.module';
+import { AdminModule } from './admin/admin.module';
+import { ChartsModule } from './charts/charts.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +21,8 @@ import { HomeModule } from './home/home.module';
     UserModule,
     FormsModule,
     HomeModule,
+    AdminModule,
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
