@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminComponent } from './admin.component';
+import { ChartsComponent } from './charts.component';
 
 
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [ChartsComponent],
   imports: [
     CommonModule
   ]
 })
-export class AdminModule { }
+export class ChartsModule { }
