@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { UserModule } from './user/user.module';
 import { FormsModule } from '@angular/forms';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     UserModule,
     FormsModule,
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
