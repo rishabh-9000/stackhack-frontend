@@ -3,15 +3,15 @@
     <div class="sidenav">
       <div class="links">
         <div class="mat-title">STACKHACK</div>
-        <div class="sidenav-items" [routerLink]="['']">
+        <div class="sidenav-items" (click)="sideNavItemClick('')">
           <mat-icon class="sidenav-item-icon">home</mat-icon>
           <div class="item-name">Home</div>
         </div>
-        <div class="sidenav-items" [routerLink]="['/register']">
+        <div class="sidenav-items" (click)="sideNavItemClick('register')">
           <mat-icon class="sidenav-item-icon">assignment</mat-icon>
           <div class="item-name">Register</div>
         </div>
-        <div class="sidenav-items" [routerLink]="['/charts']">
+        <div class="sidenav-items" (click)="sideNavItemClick('charts')">
           <mat-icon class="sidenav-item-icon">insert_chart</mat-icon>
           <div class="item-name">Charts</div>
         </div>
@@ -20,13 +20,16 @@
         mat-flat-button
         color="primary"
         class="admin-login"
-        [routerLink]="['/admin']"
+        (click)="sideNavItemClick('admin')"
       >
         ADMIN
       </button>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
+    <mat-icon *ngIf="windowWidth <= 850" (click)="openSideNav()"
+      >dehaze</mat-icon
+    >
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
