@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -6,7 +6,6 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { UserService } from './user.service';
-import { Register } from './models/register.interface';
 
 @Component({
   selector: 'app-user',
@@ -15,6 +14,8 @@ import { Register } from './models/register.interface';
 })
 export class UserComponent implements OnInit {
   detailsFormGroup: FormGroup;
+  imageForm = new FormControl(null, [Validators.required]);
+  imagePath: string;
   registrationTypes = [
     { key: 'Self', value: 'self' },
     { key: 'Corporate', value: 'Corporate' },
@@ -22,6 +23,8 @@ export class UserComponent implements OnInit {
     { key: 'Other', value: 'other' },
   ];
   ticketCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,6 +45,7 @@ export class UserComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       registrationType: new FormControl('', [Validators.required]),
       numberOfTickets: new FormControl('', [Validators.required]),
+      imageInfo: new FormControl(),
     });
   }
 
@@ -57,11 +61,35 @@ export class UserComponent implements OnInit {
     }
   }
 
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (e) => (this.imagePath = reader.result as string);
+      reader.readAsDataURL(file);
+
+      this.imageForm.setValue(file);
+    }
+  }
+
+  clearFile() {
+    this.imageForm.setValue('');
+    this.fileInput.nativeElement.value = '';
+  }
+
   onSubmit() {
-    this.userService
-      .register(this.detailsFormGroup.value)
-      .subscribe((response) => {
-        console.log(JSON.stringify(response));
-      });
+    const imagePayload = new FormData();
+    imagePayload.append('image', this.imageForm.value);
+
+    // TODO: Fix this using rxjs
+    this.userService.uploadImage(imagePayload).subscribe((response) => {
+      this.detailsFormGroup.get('imageInfo').setValue(response);
+      this.userService
+        .register(this.detailsFormGroup.value)
+        .subscribe((res) => {
+          console.log(JSON.stringify(res));
+        });
+    });
   }
 }

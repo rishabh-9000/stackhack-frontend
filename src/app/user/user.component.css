@@ -6,15 +6,43 @@
 .form-item {
   display: flex;
   align-items: baseline;
+
+  height: 70.13px;
+}
+
+.upload-form-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  height: 70.13px;
 }
 
 .form-item .mat-form-field {
   width: 350px;
 }
 
-.form-item .mat-icon {
+.form-item .mat-icon,
+.upload-form-item .mat-icon {
   cursor: pointer;
   padding: 10px;
+}
+
+#image-input-div {
+  display: flex;
+  align-items: center;
+}
+
+#image-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 350px;
+}
+
+#id {
+  display: none;
 }
 
 .preview-div {

@@ -70,6 +70,40 @@
         </mat-form-field>
       </div>
 
+      <div class="upload-form-item">
+        <mat-label>Upload ID Card</mat-label>
+        <div id="image-input-div">
+          <div id="image-input">
+            <button
+              mat-stroked-button
+              color="primary"
+              (click)="fileInput.click()"
+            >
+              Browse
+            </button>
+            <input
+              type="file"
+              id="id"
+              (change)="onFileChange($event)"
+              #fileInput
+              required
+            />
+            <span *ngIf="imageForm.value; else noFileSelected">{{
+              imageForm.value.name
+            }}</span>
+            <ng-template #noFileSelected>
+              <span>No File Selected</span>
+            </ng-template>
+            <mat-icon (click)="clearFile()">clear</mat-icon>
+          </div>
+          <mat-icon
+            matTooltip="ID is Required. JPG, JPEG, PNG only"
+            matTooltipPosition="above"
+            >help</mat-icon
+          >
+        </div>
+      </div>
+
       <div>
         <button
           mat-raised-button
@@ -114,6 +148,11 @@
         <span class="mat-body-2">{{
           detailsFormGroup.get("numberOfTickets").value
         }}</span>
+      </div>
+
+      <!-- TODO: Fix CSS -->
+      <div>
+        <img [src]="imagePath" />
       </div>
     </div>
     <div class="final-action-buttons">
