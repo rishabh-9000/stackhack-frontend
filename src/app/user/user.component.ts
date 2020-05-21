@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       registrationType: new FormControl('', [Validators.required]),
       numberOfTickets: new FormControl('', [Validators.required]),
-      imageInfo: new FormControl(),
+      imageInfo: new FormControl('', [Validators.required]),
     });
   }
 
