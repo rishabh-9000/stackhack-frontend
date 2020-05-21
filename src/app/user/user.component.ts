@@ -6,6 +6,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { UserService } from './user.service';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user',
@@ -82,14 +83,16 @@ export class UserComponent implements OnInit {
     const imagePayload = new FormData();
     imagePayload.append('image', this.imageForm.value);
 
-    // TODO: Fix this using rxjs
-    this.userService.uploadImage(imagePayload).subscribe((response) => {
-      this.detailsFormGroup.get('imageInfo').setValue(response);
-      this.userService
-        .register(this.detailsFormGroup.value)
-        .subscribe((res) => {
-          console.log(JSON.stringify(res));
-        });
-    });
+    this.userService
+      .uploadImage(imagePayload)
+      .pipe(
+        map((imageInfo) => {
+          this.detailsFormGroup.get('imageInfo').setValue(imageInfo);
+        }),
+        mergeMap(() => this.userService.register(this.detailsFormGroup.value))
+      )
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }
