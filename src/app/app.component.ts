@@ -1,5 +1,6 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ export class AppComponent implements OnInit {
   sideNavMode = 'side';
   sideNavOpened = true;
   windowWidth: number;
+
+  @ViewChild('sideNavRef') sideNavRef: MatSidenav;
 
   constructor(private router: Router) {}
 
@@ -35,13 +38,13 @@ export class AppComponent implements OnInit {
   }
 
   openSideNav() {
-    this.sideNavOpened = true;
+    this.sideNavRef.toggle();
   }
 
   sideNavItemClick(route: string) {
     this.router.navigate([`/${route}`]);
     if (this.windowWidth <= 850) {
-      this.sideNavOpened = false;
+      this.sideNavRef.toggle();
     }
   }
 }
