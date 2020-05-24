@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  DoCheck,
+} from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -13,13 +19,15 @@ import { map, mergeMap } from 'rxjs/operators';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, DoCheck {
   detailsFormGroup: FormGroup;
+  formCompleted = false;
+  formSubmitted = false;
   imageForm = new FormControl(null, [Validators.required]);
   imagePath: string;
   registrationTypes = [
     { key: 'Self', value: 'self' },
-    { key: 'Corporate', value: 'Corporate' },
+    { key: 'Corporate', value: 'corporate' },
     { key: 'Group', value: 'group' },
     { key: 'Other', value: 'other' },
   ];
@@ -46,12 +54,19 @@ export class UserComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       registrationType: new FormControl('', [Validators.required]),
       numberOfTickets: new FormControl('', [Validators.required]),
-      imageInfo: new FormControl('', [Validators.required]),
+      imageInfo: new FormControl(null),
     });
   }
 
-  print() {
-    console.log(this.detailsFormGroup);
+  ngDoCheck() {
+    if (
+      this.detailsFormGroup.status === 'VALID' &&
+      this.imageForm.status === 'VALID'
+    ) {
+      this.formCompleted = true;
+    } else {
+      this.formCompleted = false;
+    }
   }
 
   onChange() {
@@ -75,7 +90,7 @@ export class UserComponent implements OnInit {
   }
 
   clearFile() {
-    this.imageForm.setValue('');
+    this.imageForm.setValue(null);
     this.fileInput.nativeElement.value = '';
   }
 
@@ -92,7 +107,7 @@ export class UserComponent implements OnInit {
         mergeMap(() => this.userService.register(this.detailsFormGroup.value))
       )
       .subscribe((response) => {
-        console.log(response);
+        this.formSubmitted = true;
       });
   }
 }

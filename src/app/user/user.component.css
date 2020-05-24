@@ -73,3 +73,11 @@
 .final-action-buttons button {
   margin-right: 10px;
 }
+
+.success-screen {
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,167 +1,170 @@
-<mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="detailsFormGroup">
-    <form class="register-form" [formGroup]="detailsFormGroup">
-      <ng-template matStepLabel>Details</ng-template>
+<div *ngIf="!formSubmitted; else submitted">
+  <mat-vertical-stepper [linear]="true" #stepper>
+    <mat-step [completed]="formCompleted">
+      <form class="register-form" [formGroup]="detailsFormGroup">
+        <ng-template matStepLabel>Details</ng-template>
 
-      <div class="form-item">
-        <mat-form-field appearance="fill">
-          <mat-label>Full Name</mat-label>
-          <input matInput formControlName="fullName" required />
-        </mat-form-field>
-        <mat-icon matTooltip="Full Name is Required" matTooltipPosition="above"
-          >help</mat-icon
-        >
-      </div>
-
-      <div class="form-item">
-        <mat-form-field appearance="fill">
-          <mat-label>Mobile</mat-label>
-          <input matInput formControlName="mobile" required />
-        </mat-form-field>
-        <mat-icon
-          matTooltip="Mobile is Required. 10 Digits Minimum."
-          matTooltipPosition="above"
-          >help</mat-icon
-        >
-      </div>
-
-      <div class="form-item">
-        <mat-form-field appearance="fill">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" required />
-        </mat-form-field>
-        <mat-icon
-          matTooltip="Email is Required. Ex. example@email.com"
-          matTooltipPosition="above"
-          >help</mat-icon
-        >
-      </div>
-
-      <div class="form-item">
-        <mat-form-field appearance="fill">
-          <mat-label>Registration Type</mat-label>
-          <mat-select
-            formControlName="registrationType"
-            (selectionChange)="onChange()"
-            required
-          >
-            <mat-option
-              *ngFor="let type of registrationTypes"
-              [value]="type.value"
-            >
-              {{ type.key }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div class="form-item">
-        <mat-form-field appearance="fill">
-          <mat-label>Number of Tickets</mat-label>
-          <mat-select
-            formControlName="numberOfTickets"
-            (selectionChange)="onChange()"
-            required
-          >
-            <mat-option *ngFor="let count of ticketCount" [value]="count">
-              {{ count }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div class="upload-form-item">
-        <mat-label>Upload ID Card</mat-label>
-        <div id="image-input-div">
-          <div id="image-input">
-            <button
-              mat-stroked-button
-              color="primary"
-              (click)="fileInput.click()"
-            >
-              Browse
-            </button>
-            <input
-              type="file"
-              id="id"
-              formControlName="imageInfo"
-              (change)="onFileChange($event)"
-              #fileInput
-              required
-            />
-            <span *ngIf="imageForm.value; else noFileSelected">{{
-              imageForm.value.name
-            }}</span>
-            <ng-template #noFileSelected>
-              <span>No File Selected</span>
-            </ng-template>
-            <mat-icon (click)="clearFile()">clear</mat-icon>
-          </div>
+        <div class="form-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="fullName" required />
+          </mat-form-field>
           <mat-icon
-            matTooltip="ID is Required. JPG, JPEG, PNG only"
+            matTooltip="Full Name is Required"
             matTooltipPosition="above"
             >help</mat-icon
           >
         </div>
-      </div>
 
-      <div>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="print()"
-          matStepperNext
-        >
-          Next
+        <div class="form-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobile" required />
+          </mat-form-field>
+          <mat-icon
+            matTooltip="Mobile is Required. 10 Digits Minimum."
+            matTooltipPosition="above"
+            >help</mat-icon
+          >
+        </div>
+
+        <div class="form-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required />
+          </mat-form-field>
+          <mat-icon
+            matTooltip="Email is Required. Ex. example@email.com"
+            matTooltipPosition="above"
+            >help</mat-icon
+          >
+        </div>
+
+        <div class="form-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Registration Type</mat-label>
+            <mat-select
+              formControlName="registrationType"
+              (selectionChange)="onChange()"
+              required
+            >
+              <mat-option
+                *ngFor="let type of registrationTypes"
+                [value]="type.value"
+              >
+                {{ type.key }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Number of Tickets</mat-label>
+            <mat-select
+              formControlName="numberOfTickets"
+              (selectionChange)="onChange()"
+              required
+            >
+              <mat-option *ngFor="let count of ticketCount" [value]="count">
+                {{ count }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="upload-form-item">
+          <mat-label>Upload ID Card</mat-label>
+          <div id="image-input-div">
+            <div id="image-input">
+              <button
+                mat-stroked-button
+                color="primary"
+                (click)="fileInput.click()"
+              >
+                Browse
+              </button>
+              <input
+                type="file"
+                id="id"
+                (change)="onFileChange($event)"
+                #fileInput
+                required
+              />
+              <span *ngIf="imageForm.value; else noFileSelected">{{
+                imageForm.value.name
+              }}</span>
+              <ng-template #noFileSelected>
+                <span>No File Selected</span>
+              </ng-template>
+              <mat-icon (click)="clearFile()">clear</mat-icon>
+            </div>
+            <mat-icon
+              matTooltip="ID is Required. JPG, JPEG, PNG only"
+              matTooltipPosition="above"
+              >help</mat-icon
+            >
+          </div>
+        </div>
+
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>
+            Next
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Confirm</ng-template>
+      <div class="preview-div">
+        <div class="preview-item">
+          <span class="mat-body-1">Full Name:</span>
+          <span class="mat-body-2">{{
+            detailsFormGroup.get("fullName").value
+          }}</span>
+        </div>
+        <div class="preview-item">
+          <span class="mat-body-1">Mobile:</span>
+          <span class="mat-body-2">{{
+            detailsFormGroup.get("mobile").value
+          }}</span>
+        </div>
+        <div class="preview-item">
+          <span class="mat-body-1">Email:</span>
+          <span class="mat-body-2">{{
+            detailsFormGroup.get("email").value
+          }}</span>
+        </div>
+        <div class="preview-item">
+          <span class="mat-body-1">Registration Type:</span>
+          <span class="mat-body-2" style="text-transform: capitalize;">{{
+            detailsFormGroup.get("registrationType").value
+          }}</span>
+        </div>
+        <div class="preview-item">
+          <span class="mat-body-1">Number of Ticket(s):</span>
+          <span class="mat-body-2">{{
+            detailsFormGroup.get("numberOfTickets").value
+          }}</span>
+        </div>
+        <div class="preview-image-item">
+          <img [src]="imagePath" />
+        </div>
+      </div>
+      <div class="final-action-buttons">
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="warn" (click)="stepper.reset()">
+          Reset
+        </button>
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+          Submit
         </button>
       </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Confirm</ng-template>
-    <div class="preview-div">
-      <div class="preview-item">
-        <span class="mat-body-1">Full Name:</span>
-        <span class="mat-body-2">{{
-          detailsFormGroup.get("fullName").value
-        }}</span>
-      </div>
-      <div class="preview-item">
-        <span class="mat-body-1">Mobile:</span>
-        <span class="mat-body-2">{{
-          detailsFormGroup.get("mobile").value
-        }}</span>
-      </div>
-      <div class="preview-item">
-        <span class="mat-body-1">Email:</span>
-        <span class="mat-body-2">{{
-          detailsFormGroup.get("email").value
-        }}</span>
-      </div>
-      <div class="preview-item">
-        <span class="mat-body-1">Registration Type:</span>
-        <span class="mat-body-2" style="text-transform: capitalize;">{{
-          detailsFormGroup.get("registrationType").value
-        }}</span>
-      </div>
-      <div class="preview-item">
-        <span class="mat-body-1">Number of Ticket(s):</span>
-        <span class="mat-body-2">{{
-          detailsFormGroup.get("numberOfTickets").value
-        }}</span>
-      </div>
-      <div class="preview-image-item">
-        <img [src]="imagePath" />
-      </div>
-    </div>
-    <div class="final-action-buttons">
-      <button mat-raised-button matStepperPrevious>Back</button>
-      <button mat-raised-button color="warn" (click)="stepper.reset()">
-        Reset
-      </button>
-      <button mat-raised-button color="primary" (click)="onSubmit()">
-        Submit
-      </button>
-    </div>
-  </mat-step>
-</mat-vertical-stepper>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>
+<ng-template #submitted>
+  <div class="success-screen">
+    <div class="mat-display-1">THANKS FOR REGISTERING</div>
+  </div>
+</ng-template>
