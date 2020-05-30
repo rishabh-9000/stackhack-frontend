@@ -1,0 +1,18 @@
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+#container-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fusion-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+}

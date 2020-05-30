@@ -1,1 +1,34 @@
-<p>charts works!</p>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Attendee List">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let attendee of attendees">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ attendee.fullName }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="details">
+          <span>Email: {{ attendee.email }}</span>
+          <span>Mobile: {{ attendee.mobile }}</span>
+          <span>Number of Tickets: {{ attendee.numberOfTickets }}</span>
+          <span>Reg. Type: {{ attendee.registrationType }}</span>
+          <span>Reg. Number: {{ attendee.registrationNumber }}</span>
+          <span>Reg. Date: {{ attendee.registrationDate.split("T")[0] }}</span>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-tab>
+  <mat-tab label="Charts">
+    <div class="fusion-chart">
+      <fusioncharts
+        [width]="width"
+        [height]="height"
+        [type]="type"
+        [dataFormat]="dataFormat"
+        [dataSource]="dataSource"
+      >
+      </fusioncharts>
+    </div>
+  </mat-tab>
+</mat-tab-group>
