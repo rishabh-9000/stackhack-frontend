@@ -7,7 +7,7 @@ $ git clone https://github.com/rishabh-9000/stackhack-frontend.git
 ## Installation
 
 ```bash
-$ npm i =g @angular/cli
+$ npm i -g @angular/cli
 $ npm install
 ```
 
